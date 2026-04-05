@@ -1,0 +1,40 @@
+#profiles.yml
+# This file is used to configure the dbt profiles for the HDB Resale E2E project.
+hdb_resale_e2e:
+  outputs:
+    prod:
+      dataset: hdb_resale_prod
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: US
+      method: service-account
+      priority: interactive
+      project: hdb-resale-e2e-pipeline
+      threads: 5
+      type: bigquery
+    dev:
+      dataset: hdb_resale_dev
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile:  "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: US
+      method: service-account
+      priority: interactive
+      project: hdb-resale-e2e-pipeline
+      threads: 3
+      type: bigquery
+    raw:
+      dataset: hdb_resale_raw
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile:  "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: US
+      method: service-account
+      priority: interactive
+      project: hdb-resale-e2e-pipeline
+      threads: 5
+      type: bigquery
+  target: dev
+
+

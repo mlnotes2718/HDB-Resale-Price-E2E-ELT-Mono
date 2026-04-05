@@ -1,0 +1,14 @@
+### Configuration Guide 
+
+## Setting DATASET_ID
+# This is the unique identifier for the dataset on data.gov.sg.
+DATASET_ID : "d_8b84c4ee58e3cfc0ece0d773c8ca6abc"
+
+## Setting Source Folder and Filenames
+source_folder : 'data'
+hdb_resale_file_name : 'hdb_resale_price.csv'
+
+
+## Data Cleaning Source Folder and Seed Folder
+seed_folder_path : './hdb_resale_e2e/seeds/'
+cleaned_hdb_resale_file_name : 'clean_hdb_resale_file.csv'

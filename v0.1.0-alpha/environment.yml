@@ -1,0 +1,10 @@
+name: hdb-elt
+channels:
+  - https://repo.anaconda.com/pkgs/main
+dependencies:
+  - python=3.12
+  - pandas
+  - pyyaml
+  - conda-forge::dbt-bigquery
+  - ipykernel
+

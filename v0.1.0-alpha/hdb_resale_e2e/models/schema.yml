@@ -1,0 +1,91 @@
+version: 2
+
+sources:
+  - name: hdb_resale_raw
+    description: "Raw housing resale data"
+    tables:
+      - name: clean_hdb_resale_file
+        description: "Raw resale transaction data"
+        columns:
+          - name: month
+            description: "Transaction month"
+          - name: town
+            description: "Town name"
+          - name: flat_type
+            description: "Type of flat"
+          - name: block
+            description: "Block number"
+          - name: street_name
+            description: "Street name"
+          - name: storey_range
+            description: "Storey range"
+          - name: floor_area_sqm
+            description: "Floor area in square meters"
+          - name: flat_model
+            description: "Flat model"
+          - name: lease_commence_date
+            description: "Lease commencement date"
+          - name: remaining_lease
+            description: "Remaining lease period"
+          - name: resale_price
+            description: "Resale price"
+
+models:
+  - name: stg_resale_transactions
+    description: "Staging table for resale transactions"
+    columns:
+      - name: transaction_key
+        description: "Surrogate key for transaction"
+        tests:
+          - unique
+          - not_null
+      - name: transaction_date
+        description: "Parsed transaction date"
+        tests:
+          - not_null
+      - name: resale_price
+        description: "Resale price"
+        tests:
+          - not_null
+          - positive_values
+
+  - name: dim_date
+    description: "Date dimension"
+    columns:
+      - name: date_key
+        description: "Date surrogate key"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_location
+    description: "Location dimension"
+    columns:
+      - name: location_key
+        description: "Location surrogate key"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_property
+    description: "Property dimension"
+    columns:
+      - name: property_key
+        description: "Property surrogate key"
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_resale_transactions
+    description: "Fact table for resale transactions"
+    columns:
+      - name: transaction_key
+        description: "Transaction surrogate key"
+        tests:
+          - unique
+          - not_null
+      - name: resale_price
+        description: "Resale price"
+        tests:
+          - not_null
+          - positive_values
