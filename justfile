@@ -9,23 +9,38 @@ default:
 
 # Setup the environment
 setup:
-    @echo "🚀 Using {{env_type}} environment..."
     @if [ "{{env_type}}" = "uv" ]; then \
+        echo "🚀 Using {{env_type}} environment..."; \
         uv sync; \
         uv run pre-commit install; \
     else \
-        @echo "Use conda env create to create a conda environment"; \
+        echo "🚀 Using {{env_type}} environment..."; \
+        echo "Use conda env create to create a conda environment"; \
         pre-commit install --hook-type pre-commit --hook-type pre-push; \
     fi
 
 ## Start of development commands
 
-# Run Tests
-test *args:
-    @echo "🧪 ({{env_type}}) Running Pytest..."
-    @if [ "{{env_type}}" = "uv" ]; then uv run pytest {{args}}; else pytest {{args}}; fi
+## Ad hoc Command
+# conda env export e.g. `just envexp environment.yml`
+envexp *args:
+	@if [ "{{env_type}}" = "conda" ]; then \
+		echo "🧪 ({{env_type}}) Running Conda Environment export..."; \
+		conda env export --from-history --no-build > {{args}}; \
+	else \
+		echo "🧪 No Export Function for ({{env_type}}) Environment..."; \
+	fi
 
+# Pre-commit run before commit
+precommit:
+    @echo "🔍  ({{env_type}}) Running pre-commit..."
+    @if [ "{{env_type}}" = "uv" ]; then \
+        uv run pre-commit run --all-files; \
+    else \
+        pre-commit run --all-files; \
+    fi
 
+## List of common command
 # Check environment health
 health:
     @echo "🩺 ({{env_type}}) Checking environment health..."
@@ -36,14 +51,6 @@ health:
         conda doctor; \
     fi
 
-# Pre-commit run before commit
-precommit:
-    @echo "🔍  ({{env_type}}) Running pre-commit..."
-    @if [ "{{env_type}}" = "uv" ]; then \
-        uv run pre-commit run --all-files; \
-    else \
-        pre-commit run --all-files; \
-    fi
 
 # Remove build, cache, and coverage artifacts
 clean:
@@ -58,4 +65,4 @@ clean:
     @echo "✨ Cleaned!"
 
 # Run all checks
-run: health test clean
+run: health clean

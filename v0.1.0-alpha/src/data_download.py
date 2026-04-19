@@ -36,8 +36,8 @@ def download_file(DATASET_ID):
       if df.empty:
         logging.info("The downloaded dataframe is empty. Please check the dataset or try again later.")
         return None
-      
-      
+
+
       #display(df.head())
       # log the shape of the dataframe
       logging.info(f"Dataframe shape: {df.shape}")

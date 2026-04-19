@@ -8,7 +8,7 @@ WITH location_hierarchy AS (
         town,
         street_name,
         -- Add regional groupings based on Singapore geography
-        CASE 
+        CASE
             WHEN town IN ('ANG MO KIO', 'BISHAN', 'HOUGANG', 'PUNGGOL', 'SENGKANG', 'SERANGOON', 'THOMSON') THEN 'North East'
             WHEN town IN ('BEDOK', 'PASIR RIS', 'TAMPINES') THEN 'East'
             WHEN town IN ('BUKIT BATOK', 'BUKIT PANJANG', 'CHOA CHU KANG', 'CLEMENTI', 'JURONG EAST', 'JURONG WEST') THEN 'West'
@@ -17,7 +17,7 @@ WITH location_hierarchy AS (
             ELSE 'Other'
         END AS region,
         -- Classify by development type
-        CASE 
+        CASE
             WHEN town = 'CENTRAL AREA' THEN 'CBD'
             WHEN town IN ('BISHAN', 'ANG MO KIO', 'TOA PAYOH') THEN 'Mature Estate'
             WHEN town IN ('PUNGGOL', 'SENGKANG') THEN 'New Town'

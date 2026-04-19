@@ -9,7 +9,7 @@ WITH property_attributes AS (
         flat_model,
         storey_range,
         -- Extract room count from flat_type
-        CASE 
+        CASE
             WHEN flat_type LIKE '%1 ROOM%' THEN 1
             WHEN flat_type LIKE '%2 ROOM%' THEN 2
             WHEN flat_type LIKE '%3 ROOM%' THEN 3
@@ -20,7 +20,7 @@ WITH property_attributes AS (
             ELSE NULL
         END AS room_count,
         -- Categorize flat types
-        CASE 
+        CASE
             WHEN flat_type IN ('1 ROOM', '2 ROOM') THEN 'Small'
             WHEN flat_type IN ('3 ROOM', '4 ROOM') THEN 'Medium'
             WHEN flat_type IN ('5 ROOM', 'EXECUTIVE') THEN 'Large'
@@ -28,7 +28,7 @@ WITH property_attributes AS (
             ELSE 'Other'
         END AS flat_size_category,
         -- Extract storey information
-        CASE 
+        CASE
             WHEN storey_range LIKE '%01 TO 03%' THEN 'Low'
             WHEN storey_range LIKE '%04 TO 06%' OR storey_range LIKE '%07 TO 09%' THEN 'Mid'
             WHEN storey_range LIKE '%10 TO 12%' OR storey_range LIKE '%13 TO 15%' THEN 'High'

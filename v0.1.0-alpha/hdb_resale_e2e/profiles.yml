@@ -36,5 +36,3 @@ hdb_resale_e2e:
       threads: 5
       type: bigquery
   target: dev
-
-

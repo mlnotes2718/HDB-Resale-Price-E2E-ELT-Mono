@@ -38,10 +38,10 @@ def main():
 
     # Initialize and run data preparation
     logging.info("Data Cleaning")
-    
+
     # Cleaning HDB Resale file
     hdb_resale_file_name = config['hdb_resale_file_name']
-    cleaned_hdb_resale_file_name = config['cleaned_hdb_resale_file_name'] 
+    cleaned_hdb_resale_file_name = config['cleaned_hdb_resale_file_name']
     clean_hdb_resale_from_2017(source_folder, hdb_resale_file_name, seed_destination, cleaned_hdb_resale_file_name)
     logging.info("Data Cleaning Completed")
 

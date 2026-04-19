@@ -7,4 +7,3 @@ dependencies:
   - pyyaml
   - conda-forge::dbt-bigquery
   - ipykernel
-
